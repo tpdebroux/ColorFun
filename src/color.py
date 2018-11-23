@@ -104,5 +104,5 @@ else:
 R_comp = int(round(R_comp))
 G_comp = int(round(G_comp))
 B_comp = int(round(B_comp))
-print ('Complimentary color: ')
+print ('Complementary color: ')
 print (R_comp, G_comp, B_comp)
