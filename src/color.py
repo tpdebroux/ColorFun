@@ -50,9 +50,12 @@ else:
     else:
         S = diffVal / (2 - maxVal - minVal)
 
-    deltaR = (((maxVal - valR) / 6) + (diffVal / 2)) / diffVal
-    deltaG = (((maxVal - valG) / 6) + (diffVal / 2)) / diffVal
-    deltaB = (((maxVal - valB) / 6) + (diffVal / 2)) / diffVal
+    if(diffVal == 0):
+        deltaR = deltaG = deltaB = 0
+    else:
+        deltaR = (((maxVal - valR) / 6) + (diffVal / 2)) / diffVal
+        deltaG = (((maxVal - valG) / 6) + (diffVal / 2)) / diffVal
+        deltaB = (((maxVal - valB) / 6) + (diffVal / 2)) / diffVal
 
     if (valR== maxVal):
         H = deltaB - deltaG
@@ -66,3 +69,5 @@ else:
     if (H > 1):
         H -= 1
 print(H,S,L)
+H2 = (H + 0.5) % 1
+print(H2)
