@@ -81,7 +81,24 @@ def getComplement( r, g, b ):
     B = int(round(RGB[2]))
     print('Complement color: ')
     print(R,G,B)
-
+def getAnalogous( r, g, b):
+    HSL = RGBtoHSL(r, g, b)
+    H = HSL[0]
+    S = HSL[1]
+    L = HSL[2]
+    Hleft = (H + (1/12)) % 1
+    RGBleft = HSLtoRGB(Hleft, S, L)
+    Rleft = int(round(RGBleft[0]))
+    Gleft = int(round(RGBleft[1]))
+    Bleft = int(round(RGBleft[2]))
+    Hright = (H - (1/12)) % 1
+    RGBright = HSLtoRGB(Hright, S, L)
+    Rright = int(round(RGBright[0]))
+    Gright = int(round(RGBright[1]))
+    Bright = int(round(RGBright[2]))
+    print('Analogous colors: ')
+    print(Rleft,Gleft,Bleft)
+    print(Rright, Gright, Bright)
 print('Enter a color in RGB form:\n')
 #get rgb values from user, and catch bad input
 r = input('R: ')
