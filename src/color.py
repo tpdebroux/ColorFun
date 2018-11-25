@@ -1,3 +1,7 @@
+import tkinter
+
+top = tkinter.Tk()
+
 def HuetoRGB( v1, v2, vH ):
    if (vH < 0):
         vH += 1
@@ -27,7 +31,8 @@ def HSLtoRGB( H, S, L):
        R = 255 * HuetoRGB(var_1, var_2, H + (1 / 3))
        G = 255 * HuetoRGB(var_1, var_2, H)
        B = 255 * HuetoRGB(var_1, var_2, H - (1 / 3))
-       return [R,G,B]
+
+    return [R,G,B]
 
 def RGBtoHSL( r, g, b):
     valR = r / 255
@@ -99,6 +104,37 @@ def getAnalogous( r, g, b):
     print('Analogous colors: ')
     print(Rleft,Gleft,Bleft)
     print(Rright, Gright, Bright)
+def getInvertExperiment( r, g, b):# testing what I get if I invert the hue saturation and light, inverting just the hue gets us the compelment color
+    #this ends up not being that pleasing, inverting the saturation of an HSL results in some bland colors
+    #inverting the hue and light might be more exciting, implementing that method now below
+    HSL = RGBtoHSL(r, g, b)
+    H = HSL[0]
+    S = HSL[1]
+    L = HSL[2]
+    H = (H + 0.5) % 1
+    S = (S + 0.5) % 1
+    L = (L + 0.5) % 1
+    RGB = HSLtoRGB(H, S, L)
+    R = int(round(RGB[0]))
+    G = int(round(RGB[1]))
+    B = int(round(RGB[2]))
+    print('Invert color: ')
+    print(R,G,B)
+def getInvert2( r, g, b):
+    #after experimenting more with inverting different HSL values individually and grouped, I've realized that sometimes I expect
+    #a certain result and not get it since colors are pretty weird.
+    HSL = RGBtoHSL(r, g, b)
+    H = HSL[0]
+    S = HSL[1]
+    L = HSL[2]
+    S = (S + 0.5) % 1
+    RGB = HSLtoRGB(H, S, L)
+    R = int(round(RGB[0]))
+    G = int(round(RGB[1]))
+    B = int(round(RGB[2]))
+    print('Invert color: ')
+    print(R,G,B)
+
 print('Enter a color in RGB form:\n')
 #get rgb values from user, and catch bad input
 r = input('R: ')
@@ -134,3 +170,6 @@ print('Input color: ')
 print(r,g,b)
 getComplement(r,g,b)
 getAnalogous(r,g,b)
+getInvert2(r,g,b)
+label = Label('Input Color: ')
+top.mainloop()
